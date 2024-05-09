@@ -1,0 +1,91 @@
+
+http://localhost:9999/api/products [GET] (lấy toàn bô products)
+{
+    "statusCode": 200,
+    "message": "Get all product",
+    "data": [
+        {
+            "id": 1,
+            "name": "abc",
+            "image": "606854ad-cab5-4ba1-8c4c-a532f15007d2.jpeg",
+            "price": 123123.0,
+            "description": "abc",
+            "quantity": 14,
+            "createDate": "2024-05-08T08:23:58.681+00:00",
+            "category": {
+                "id": 1,
+                "name": "abc",
+                "createDate": "2024-05-08T07:51:32.746+00:00",
+                "products": null
+            }
+        }
+    ]
+}
+
+cấu trúc
+
+http://localhost:9999/api/products
+http://localhost:9999/api/products
+
+Tiêu Đề API
+(Tên API và mô tả tổng quan về nó)
+
+Đường Dẫn API
+
+(Định nghĩa đường dẫn cơ bản của API, bao gồm các phần động và tùy chọn)
+
+Phương Thức HTTP
+
+(Phương thức HTTP được hỗ trợ, ví dụ: GET, POST, PUT, DELETE)
+
+Tham Số Đầu Vào
+
+(Danh sách các tham số đầu vào cần thiết hoặc tùy chọn)
+
+Tên Tham Số 1:
+Loại dữ liệu:
+Mô tả:
+Tên Tham Số 2:
+Loại dữ liệu:
+Mô tả:
+...
+
+Thân Yêu Cầu
+
+(Mô tả cấu trúc của thân yêu cầu, nếu có)
+
+Phản Hồi
+
+(Mô tả cấu trúc của phản hồi từ API)
+
+statusCode:
+Loại dữ liệu: số nguyên
+Mô tả: Mã trạng thái HTTP của phản hồi.
+message:
+Loại dữ liệu: chuỗi
+Mô tả: Thông điệp mô tả kết quả của yêu cầu.
+data (nếu có):
+Loại dữ liệu: đối tượng hoặc mảng JSON
+Mô tả: Dữ liệu chính của phản hồi.
+...
+
+Lỗi và Xử Lý Lỗi
+
+(Mô tả các mã lỗi và cách xử lý chúng)
+
+Hạn Chế
+
+(Các hạn chế hoặc quy định đặc biệt)
+
+Ví Dụ
+
+(Một hoặc một số ví dụ về cách sử dụng API)
+
+Hướng Dẫn Đăng Ký
+
+(Hướng dẫn về cách đăng ký và nhận các thông tin xác thực nếu cần)
+
+Ví Dụ Tài liệu API
+(Tiêu đề API và nội dung)
+
+Ngoài ra, bạn cũng có thể sử dụng các công cụ tự động hóa như Swagger hoặc Postman để tạo tài liệu API tự động từ mã API của bạn. Điều này giúp tiết kiệm thời gian và đảm bảo tính chính xác của tài liệu.
