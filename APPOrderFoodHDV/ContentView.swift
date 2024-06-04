@@ -6,19 +6,32 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
+    
+    @StateObject private var locationManager = LocationManager.shared
+    @State private var search: String = ""
+    @StateObject private var vm = SearchResultsViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+        NavigationView {
+            VStack {
+                
+                List(vm.places) { place in
+                    Text(place.name)
+                }
+                
+            }.searchable(text: $vm.searchText)
+              
+                .navigationTitle("Places")
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
