@@ -34,7 +34,13 @@
 "data":
 }
 ~~~
-
+{
+    "username": "huydien",
+    "email": "dienchau45@gmail.com",
+    "password": "dienchau45",
+    "phone": "0123456789",
+    "address": "Binh Dinh"
+}
 ## Đăng ký
 ### /api/login/signup 
 **request method: [POST]**
