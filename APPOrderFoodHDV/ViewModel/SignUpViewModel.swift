@@ -49,7 +49,6 @@ class SignUpViewModel: ObservableObject {
           completion(success, errorMessage)
         }
       }
-
       dataTask.resume()
     }
 

@@ -10,10 +10,12 @@ import SwiftUI
 struct LogInView: View {
     @Binding var show : Bool
     @Binding var isSignup : Bool
-    @State var userName = ""
-    @State var passWord = ""
+    @State var signInModel = SignInViewModel()
     @State var isLoginSuccess = false
     @State var alert = false
+    @State var isSucess = false
+    @State var isWrong = false
+    @State var isEmpty = false
     var body: some View {
         VStack{
             HStack{
@@ -37,7 +39,7 @@ struct LogInView: View {
             Text("Đăng nhập để được ăn ngon nhé")
                 .foregroundColor(.secondary)
             Spacer()
-            TextField("User name", text:$userName)
+            TextField("User name", text:$signInModel.signIn.username)
                 .padding()
                 .background(Color(.white))
                 .cornerRadius(8)
@@ -48,7 +50,7 @@ struct LogInView: View {
                         .stroke(lineWidth: 0.1)
                         .foregroundStyle(.black)
                 }
-            SecureField("Password", text:$passWord)
+            SecureField("Password", text:$signInModel.signIn.password)
                 .padding()
                 .background(Color(.white))
                 .cornerRadius(8)
@@ -61,7 +63,18 @@ struct LogInView: View {
                 }
         Spacer()
             ButtonStyleWelcome(icon: "", title: "Đăng nhập"){
-         
+                if signInModel.signIn.username.isEmpty || signInModel.signIn.password.isEmpty {
+                    isEmpty = true
+                }else {
+                    signInModel.Login{success in
+                        if success {
+                            isSucess = true
+                        } else {
+                            isWrong = true
+                        }
+                        
+                    }
+                }
             }.padding()
         }.padding()
             .opacity(show ? 1 :0)
@@ -70,9 +83,15 @@ struct LogInView: View {
                 
                                 
             })
-            .alert("Sai tên đăng nhập hoặc mật khẩu", isPresented: $alert) {
+            .alert("Sai tên đăng nhập hoặc mật khẩu", isPresented: $isWrong) {
                         Button("OK", role: .cancel) { }
                     }
+            .alert("Đừng bỏ trống", isPresented: $isEmpty) {
+                        Button("OK", role: .cancel) { }
+                    }
+            .fullScreenCover(isPresented: $isSucess, content: {
+                TabView()
+            })
     }
 }
 

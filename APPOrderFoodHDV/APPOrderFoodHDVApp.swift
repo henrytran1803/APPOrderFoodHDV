@@ -11,7 +11,7 @@ import SwiftUI
 struct APPOrderFoodHDVApp: App {
     var body: some Scene {
         WindowGroup {
-            SignUpView(show: .constant(true), isSignin: .constant(false))
+            ContentView()
         }
     }
 }
