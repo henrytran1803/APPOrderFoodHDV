@@ -8,19 +8,17 @@
 import SwiftUI
 
 struct ListCategory: View {
+    @Binding var listCategory: [Category]
     @StateObject var viewModel = CategoryListViewModel()
+    @State var selectedCategory: Category?
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
                 ForEach(viewModel.categories, id: \.name) { category in
-                    CategorySmallView(category: category)
-//                        .onTapGesture {
-//                            self.selectedCategory = category
-//                        }
-//                        .background(
-//                            RoundedRectangle(cornerRadius: 10)
-//                                .foregroundColor(category == selectedCategory ? .blue : .clear)
-//                        )
+                    CategorySmallView(category: category, listCategory: $listCategory)
+                        .onTapGesture {
+                            
+                        }
                 }
             }
             .padding(.horizontal)
@@ -29,20 +27,21 @@ struct ListCategory: View {
             viewModel.fetchCategories()
         }
     }
+    
+ 
 }
 
 struct CategorySmallView: View {
     var category: Category
     @State var isClick = false
-    
+    @Binding var listCategory: [Category]
+
     var body: some View {
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: 150, height: 45)
-                .foregroundColor(isClick ? Color("bgcategory") : Color("bgproduct"))
+                .foregroundColor(isClick ? Color.white : Color("bgproduct"))
                 .overlay {
                     HStack {
-
-                        
                         Text(category.name)
                             .foregroundColor(isClick ? .black : .white)
                             .bold()
@@ -51,12 +50,19 @@ struct CategorySmallView: View {
         
         .buttonStyle(PlainButtonStyle())
         .onTapGesture {
+            toggleCategorySelection(category: category)
             self.isClick.toggle()
         }
+    }
+    private func toggleCategorySelection(category: Category) {
+        if let index = listCategory.firstIndex(of: category) {
+            listCategory.remove(at: index)
+        } else {
+            listCategory.append(category)
+        }
+        print("\(listCategory)")
     }
 }
 
 
-#Preview {
-    ListCategory()
-}
+

@@ -53,3 +53,4 @@ struct PlayerView_Previews: PreviewProvider {
         PlayerView()
     }
 }
+

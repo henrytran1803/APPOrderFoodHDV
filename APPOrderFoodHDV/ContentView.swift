@@ -9,23 +9,12 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-    
-    @StateObject private var locationManager = LocationManager.shared
-    @State private var search: String = ""
-    @StateObject private var vm = SearchResultsViewModel()
-    
     var body: some View {
-        
-        NavigationView {
-            VStack {
-                
-                List(vm.places) { place in
-                    Text(place.name)
-                }
-                
-            }.searchable(text: $vm.searchText)
-              
-                .navigationTitle("Places")
+        let isLogin = UserDefaults.standard.bool(forKey: "isLogin")
+        if isLogin  {
+            TabView()
+        }else{
+            WelcomeView()
         }
     }
 }

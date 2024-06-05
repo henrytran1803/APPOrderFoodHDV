@@ -9,7 +9,18 @@ import SwiftUI
 
 struct SettingView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Spacer()
+            Button(action: logout) {
+                Label("Logout", systemImage: "power")
+            }
+            Spacer()
+        }
+    }
+    func logout(){
+        UserDefaults.standard.set("", forKey: "token")
+        UserDefaults.standard.set("", forKey: "id_user")
+        UserDefaults.standard.set(false, forKey: "isLogin")
     }
 }
 
