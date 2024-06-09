@@ -13,6 +13,8 @@ struct BottomProduct: View {
     @State private var count = 1
     @State private var totalPrice: Double = 0
     @State private var isAdd = false
+    @ObservedObject private var cartItemModel = CartItemViewModel()
+    @ObservedObject var model = FavoriteViewModel()
 
     var body: some View {
         VStack {
@@ -20,6 +22,7 @@ struct BottomProduct: View {
                 Spacer()
             }
             ZStack {
+                
                 RoundedRectangle(cornerRadius: 30)
                     .foregroundColor(Color.white)
                     .frame(width: .infinity, height: isClick ? 400 : 0)
@@ -59,6 +62,17 @@ struct BottomProduct: View {
                                     .bold()
                                     .font(.title)
                                 Spacer()
+                                Button(action: { model.isFavorite.toggle()
+                                    if model.isFavorite {
+                                        model.addFavorite(productId: product.id)
+                                    }else {
+                                        model.deleteFavoriteById()
+                                    }
+                                }) {
+                                    Image(systemName: model.isFavorite ? "heart.fill" : "heart")
+                                        .foregroundColor(.pink)
+                                }
+
                             }
                             .padding(.vertical)
                             HStack {
@@ -83,7 +97,10 @@ struct BottomProduct: View {
                                         }
                                     )
                                 Spacer()
-                                Button(action: { isAdd = true }) {
+                                Button(action: { isAdd = true
+                                    cartItemModel.addItem(product, quantity: count)
+                                    print(cartItemModel.items)
+                                }) {
                                     RoundedRectangle(cornerRadius: 20)
                                         .foregroundColor(isAdd ? .green : Color("bgproduct"))
                                         .frame(width: isAdd ? .infinity : 148, height: 76)
@@ -102,6 +119,10 @@ struct BottomProduct: View {
                         }
                         .padding([.leading, .bottom, .trailing])
                     )
+            }
+            .onAppear{
+                model.checkIfProductIsFavorited(productId: product.id)
+                print(model.isFavorite)
             }
         }
         .ignoresSafeArea()

@@ -60,7 +60,6 @@ struct CategorySmallView: View {
         } else {
             listCategory.append(category)
         }
-        print("\(listCategory)")
     }
 }
 
