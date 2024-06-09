@@ -42,6 +42,7 @@ struct DetailProductView: View {
                     }
                 }
         }.ignoresSafeArea()
+           
         
     }
 }

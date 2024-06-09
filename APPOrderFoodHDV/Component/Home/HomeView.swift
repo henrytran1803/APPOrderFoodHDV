@@ -51,11 +51,7 @@ struct HomeView: View {
                 
             }.padding(.top, 60)
         }
-            .onAppear {
-                userModel.fetchUser{success in
-                    
-                }
-            }
+
         
     }
 

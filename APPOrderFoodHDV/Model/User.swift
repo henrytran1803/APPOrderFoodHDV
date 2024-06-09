@@ -7,16 +7,16 @@
 
 import Foundation
 struct User: Codable {
-    let id: Int
-    let username: String
-    let email: String
-    let createDate: String
-    let phone: String
-    let address: String
-    let roles: Int
+    var id: Int
+    var username: String
+    var email: String
+    var createDate: String
+    var phone: String
+    var address: String
+    var roles: Int
 }
 struct UserResponse : Codable{
-    let statusCode: Int
-    let message: String
-    let data: User
+    var statusCode: Int
+    var message: String
+    var data: User
 }
