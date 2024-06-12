@@ -15,7 +15,7 @@ class ProductListViewModel: ObservableObject {
         }
     }
     func fetchProducts(completion: @escaping (Bool) -> Void) {
-        guard let url = URL(string: "http://127.0.0.1:8081/api/products") else {
+        guard let url = URL(string: "http://127.0.0.1:9000/api/products") else {
             completion(false)
             return
         }

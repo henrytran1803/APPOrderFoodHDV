@@ -11,7 +11,7 @@ class UserViewModel: ObservableObject {
     @Published var user: User = User(id: 0, username: "", email: "", createDate: "", phone: "", address: "", roles: 0)
     @Published var errorMessage: String?
 
-    var apiString = "http://127.0.0.1:8080/api/users/"
+    var apiString = "http://127.0.0.1:9000/api/users/"
 
     init() {
         fetchUser { success in

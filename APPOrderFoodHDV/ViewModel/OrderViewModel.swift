@@ -48,9 +48,10 @@ class OrderViewModel: ObservableObject {
         
         dataTask.resume()
     }
-    func postOrder(orderRequest: OrderCreate) {
+    func postOrder(orderRequest: OrderCreate, completion: @escaping (Int?) -> Void) {
         guard let url = URL(string: "http://localhost:9000/api/orders") else {
             print("Invalid URL")
+            completion(nil)
             return
         }
         
@@ -64,17 +65,20 @@ class OrderViewModel: ObservableObject {
             request.httpBody = jsonData
         } catch {
             print("Error encoding order request: \(error)")
+            completion(nil)
             return
         }
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error: \(error)")
+                completion(nil)
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 print("Invalid response")
+                completion(nil)
                 return
             }
             
@@ -86,17 +90,22 @@ class OrderViewModel: ObservableObject {
                         let decoder = JSONDecoder()
                         let orderResponse = try decoder.decode(OrderResponseCreate.self, from: responseData)
                         UserDefaults.standard.set(orderResponse.data, forKey: "orderID")
+                        completion(orderResponse.data)
                     } catch {
                         print("Error decoding order response: \(error)")
+                        completion(nil)
                     }
                 } else {
                     print("No data received")
+                    completion(nil)
                 }
             } else {
                 print("Failed to post order. Status code: \(httpResponse.statusCode)")
+                completion(nil)
             }
         }
         
         task.resume()
     }
+
 }

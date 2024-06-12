@@ -19,7 +19,7 @@ class ProductListsViewModel: ObservableObject {
     }
 
     private func fetchProduct(forItem item: CartItem) {
-        guard let url = URL(string: "http://127.0.0.1:8081/api/products/\(item.id)") else {
+        guard let url = URL(string: "http://127.0.0.1:9000/api/products/\(item.id)") else {
             return
         }
 
