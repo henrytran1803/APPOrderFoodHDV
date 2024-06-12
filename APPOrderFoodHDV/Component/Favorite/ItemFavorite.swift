@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ItemFavorite: View {
-    @Binding var product: Favorite
+    @State var product: Favorite
     @ObservedObject var model = FavoriteViewModel()
     var body: some View {
         HStack{
@@ -22,7 +22,7 @@ struct ItemFavorite: View {
                 model.idFavorite = product.id
                     model.deleteFavoriteById()
             }) {
-                Image(systemName: model.isFavorite ? "heart.fill" : "heart")
+                Image(systemName: model.isFavorite ? "heart" : "heart.fill")
                     .foregroundColor(.pink)
             }
         }

@@ -24,15 +24,15 @@ struct PaymentView: View {
             }
             Button(action: {
                 isCheckout  = .success
-                model.postOrder(orderRequest: order)
-                UserDefaults.standard.set("", forKey: "CartItems")
-                let userid = UserDefaults.standard.integer(forKey: "id_user")
-                let orderid = UserDefaults.standard.integer(forKey: "orderID")
-                print(orderid)
+                model.postOrder(orderRequest: order){idOrder in
+                    UserDefaults.standard.set("", forKey: "CartItems")
+                    let userid = UserDefaults.standard.integer(forKey: "id_user")
+                    
+                    let payment = PaymentRequest(idOrder: idOrder ?? 0, idUser: userid, idPayed: 0, paymentStatus:.notStarted)
+                    print(payment)
+                    modelPayment.postPayment(paymentRequest: payment)
+                }
                 
-                let payment = PaymentRequest(idOrder: orderid, idUser: userid, idPayed: 0, paymentStatus:.notStarted)
-                print(payment)
-                modelPayment.postPayment(paymentRequest: payment)
             }, label: {
                 RoundedRectangle(cornerRadius: 25.0)
                     .foregroundColor(Color("bgproduct"))
